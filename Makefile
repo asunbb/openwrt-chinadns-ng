@@ -16,7 +16,7 @@ PKG_USE_MIPS16:=0
 
 PKG_LICENSE:=GPL-3.0
 PKG_LICENSE_FILES:=LICENSE
-PKG_MAINTAINER:=pexcn <i@pexcn.me>
+PKG_MAINTAINER:=asunbb <asunbb@qq.com>
 
 include $(INCLUDE_DIR)/package.mk
 
@@ -32,42 +32,9 @@ define Package/chinadns-ng/description
 ChinaDNS Next Generation, refactoring with epoll and ipset.
 endef
 
-define Package/chinadns-ng/conffiles
-/etc/config/chinadns-ng
-/etc/chinadns-ng/chnroute.txt
-/etc/chinadns-ng/chnroute6.txt
-/etc/chinadns-ng/gfwlist.txt
-/etc/chinadns-ng/chinalist.txt
-endef
-
 define Package/chinadns-ng/install
-	$(INSTALL_DIR) $(1)/usr/bin
-	$(INSTALL_BIN) $(PKG_BUILD_DIR)/chinadns-ng $(1)/usr/bin
-	$(INSTALL_BIN) files/chinadns-ng-daily.sh $(1)/usr/bin
-	$(INSTALL_DIR) $(1)/etc/init.d
-	$(INSTALL_BIN) files/chinadns-ng.init $(1)/etc/init.d/chinadns-ng
-	$(INSTALL_DIR) $(1)/etc/config
-	$(INSTALL_CONF) files/chinadns-ng.config $(1)/etc/config/chinadns-ng
-	$(INSTALL_DIR) $(1)/etc/chinadns-ng
-	$(INSTALL_DATA) files/chnroute.txt $(1)/etc/chinadns-ng
-	$(INSTALL_DATA) files/chnroute6.txt $(1)/etc/chinadns-ng
-	$(INSTALL_DATA) files/gfwlist.txt $(1)/etc/chinadns-ng
-	$(INSTALL_DATA) files/chinalist.txt $(1)/etc/chinadns-ng
-endef
-
-define Package/chinadns-ng/postinst
-#!/bin/sh
-if ! crontab -l | grep -q "chinadns-ng"; then
-  (crontab -l; echo -e "# chinadns-ng\n10 3 * * * /usr/bin/chinadns-ng-daily.sh") | crontab -
-fi
-exit 0
-endef
-
-define Package/chinadns-ng/postrm
-#!/bin/sh
-rmdir --ignore-fail-on-non-empty /etc/chinadns-ng
-(crontab -l | grep -v "chinadns-ng") | crontab -
-exit 0
+	$(INSTALL_DIR) $(1)/opt/bin
+	$(INSTALL_BIN) $(PKG_BUILD_DIR)/chinadns-ng $(1)/opt/bin
 endef
 
 $(eval $(call BuildPackage,chinadns-ng))
