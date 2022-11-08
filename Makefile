@@ -25,7 +25,8 @@ define Package/chinadns-ng
 	CATEGORY:=Network
 	TITLE:=ChinaDNS Next Generation, refactoring with epoll and ipset
 	URL:=https://github.com/zfl9/chinadns-ng
-	DEPENDS:=+ipset
+	DEPENDS:+=ipset
+	DEPENDS:+=libgcc
 endef
 
 define Package/chinadns-ng/description
