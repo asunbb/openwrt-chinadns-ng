@@ -5,8 +5,8 @@ PKG_VERSION:=1.0-beta.25
 PKG_RELEASE:=2
 
 PKG_SOURCE_PROTO:=git
-PKG_SOURCE_URL:=https://github.com/zfl9/chinadns-ng.git
-PKG_SOURCE_VERSION:=e7c4ebd64af2690a153fb0e16a5f543d185545d6
+PKG_SOURCE_URL:=https://github.com/asunbb/chinadns-ng.git
+PKG_SOURCE_VERSION:=9ba4388b687faea8efcd02089cd3df1d948ad189
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION)-$(PKG_SOURCE_VERSION).tar.gz
 PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)-$(PKG_SOURCE_VERSION)
 PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)/$(PKG_SOURCE_SUBDIR)
@@ -25,8 +25,7 @@ define Package/chinadns-ng
 	CATEGORY:=Network
 	TITLE:=ChinaDNS Next Generation, refactoring with epoll and ipset
 	URL:=https://github.com/zfl9/chinadns-ng
-	DEPENDS:+=ipset
-	DEPENDS:+=libgcc
+	DEPENDS:=+ipset
 endef
 
 define Package/chinadns-ng/description
